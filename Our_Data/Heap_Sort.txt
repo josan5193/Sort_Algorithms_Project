@@ -5,9 +5,7 @@ Timing for array size 10000: 0.20594979999999907 seconds.
 Number of comparisions for array size 10000 is: 402717
 Timing for array size 100000: 2.7267688000001726 seconds.
 Number of comparisions for array size 100000 is: 5025741
--------------BEST CASE------------
 Timing for array size 10000: 0.2606838000001517 seconds.
 Number of comparisions for array size 10000 is: 425871
--------------WORST CASE------------
 Timing for array size 10000: 0.2523823999999877 seconds.
 Number of comparisions for array size 10000 is: 380091
