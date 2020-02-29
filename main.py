@@ -3,7 +3,7 @@ import random
 from timeit import default_timer as timer
 MERG = 'Our_Data/Merge_Sort.txt'
 HEAP = 'Our_Data/Heap_Sort.txt'
-INSE = 'Our_Data/Insertion_Sort.txt'
+SELE = 'Our_Data/Selection__Sort.txt'
 BUBB = 'Our_Data/Bubble_Sort.txt'
 
 #variables for comparisions of merge and heap sort. 
@@ -17,6 +17,21 @@ def write2file(filename, message):
     myfile = open(filename, 'a')
     myfile.write(message + "\n")
     myfile.close()
+
+#funtion to write the different cases to the files
+def write2all(message):
+    myfile1 = open(MERG, 'a')
+    myfile2 = open(HEAP, 'a')
+    myfile3 = open(SELE, 'a')
+    myfile4 = open(BUBB, 'a')
+    myfile1.write("-------------" + message + " CASE------------\n")
+    myfile2.write("-------------" + message + " CASE------------\n")
+    myfile3.write("-------------" + message + " CASE------------\n")
+    myfile4.write("-------------" + message + " CASE------------\n")
+    myfile1.close()
+    myfile2.close()
+    myfile3.close()
+    myfile4.close()
 
 #generate a random array
 def rand_array(size):
@@ -40,40 +55,26 @@ def sorted_array_WORST(size):
         arr.append(size - (i-1))
     return arr
 
-#python implementation for insertion sort
-def insertion_sort(arr):
-    counter = 0   
-    for i in range(len(arr)):
-        cursor = arr[i]
-        pos = i
-        
-        while pos > 0 and arr[pos - 1] > cursor:
-            print(test)
-            counter += 1
-            # Swap the number down the list
-            arr[pos] = arr[pos - 1]
-            pos = pos - 1
-        # Break and do the final swap
-        arr[pos] = cursor
+#python implementation for selection sort
+def selection_sort(alist):
+   counter = 0
+   for i in range(len(alist)):
 
-    print(counter)
-    return arr, counter
+      # Find the minimum element in remaining
+       minPosition = i
 
-def insertionSort(alist):
-	counter = 0
-	for i in range(1,len(alist)):
+       for j in range(i+1, len(alist)):
+           counter += 1
+           if alist[minPosition] > alist[j]:
+               minPosition = j
+                
+       # Swap the found minimum element with minPosition       
+       temp = alist[i]
+       alist[i] = alist[minPosition]
+       alist[minPosition] = temp
 
-		#element to be compared
-		current = alist[i]
+   return alist, counter
 
-		#comparing the current element with the sorted portion and swapping
-		while i>0 and alist[i-1]>current:
-			counter += 1
-			alist[i] = alist[i-1]
-			i = i-1
-			alist[i] = current
-
-	return alist, counter
 
 #python implemenation for bubble_sort
 def bubble_sort(arr):
@@ -183,7 +184,10 @@ def heap_sort(arr):
 #Function for testing all the sorts and outputing data to file
 def test_suite(arr):
     size_of_array = len(arr)
-    arr2 = arr
+    arr1 = arr.copy()
+    arr2 = arr.copy()
+    arr3 = arr.copy()
+    arr4 = arr.copy()
     #reseting comparision counter for merge and heap sort.
     global c12
     global c14
@@ -191,23 +195,23 @@ def test_suite(arr):
 
     #testing bubble sort
     start = timer()
-    sorted, counter = bubble_sort(arr)
+    sorted, counter = bubble_sort(arr1)
     end = timer()
     time = end - start
     write2file(BUBB, "Timing for array size {}: {} seconds.".format(size_of_array, time))
     write2file(BUBB, "Number of comparisions for array size {} is: {}".format(size_of_array, counter))
 
-    #testing insertion sort
+    #testing selection sort
     start = timer()
-    sorted, counter = insertionSort(arr2)
+    sorted, counter = selection_sort(arr2)
     end = timer()
     time = end - start
-    write2file(INSE, "Timing for array size {}: {} seconds.".format(size_of_array, time))
-    write2file(INSE, "Number of comparisions for array size {} is: {}".format(size_of_array, counter))
+    write2file(SELE, "Timing for array size {}: {} seconds.".format(size_of_array, time))
+    write2file(SELE, "Number of comparisions for array size {} is: {}".format(size_of_array, counter))
 
     #testing merge sort
     start = timer()
-    merge_sort(arr)
+    merge_sort(arr3)
     end = timer()
     time = end - start
     write2file(MERG, "Timing for array size {}: {} seconds.".format(size_of_array, time))
@@ -215,13 +219,38 @@ def test_suite(arr):
 
     #testing bubble sort
     start = timer()
-    heap_sort(arr2)
+    heap_sort(arr4)
     end = timer()
     time = end - start
     write2file(HEAP, "Timing for array size {}: {} seconds.".format(size_of_array, time))
-    write2file(HEAP, "Number of comparisions for array size {} is: {}".format(size_of_array, time))
+    write2file(HEAP, "Number of comparisions for array size {} is: {}".format(size_of_array, c14))
 
 if __name__ == '__main__':
+    
+    #creating arrays of different sizes and best and worst case
+    print("Generating our lists!")
+    size_1000 = rand_array(1000)
+    size_10000 = rand_array(10000)
+    size_100000 = rand_array(100000)
+    best_case = sorted_array_BEST(10000)
+    worst_case = sorted_array_WORST(10000)
+    
+    #average cases
+    write2all("AVERAGE")
+    print("Starting average case of size 1000!")
+    test_suite(size_1000)
+    print("Starting average case of size 10000!")
+    test_suite(size_10000)
+    print("Starting average case of size 100000!")
+    test_suite(size_100000)
+    
+    #best cases
+    write2all("BEST")
+    print("Starting best case size 10000!")
+    test_suite(best_case)
 
-    test1 = rand_array(1000)
-    test_suite(test1)
+    #worst cases
+    write2all("WORST")
+    print("Starting worst case size 10000!")
+    test_suite(worst_case)
+    print("Done with all the sorting! Check the results")
