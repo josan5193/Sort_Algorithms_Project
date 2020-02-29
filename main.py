@@ -48,14 +48,32 @@ def insertion_sort(arr):
         pos = i
         
         while pos > 0 and arr[pos - 1] > cursor:
+            print(test)
             counter += 1
             # Swap the number down the list
             arr[pos] = arr[pos - 1]
             pos = pos - 1
         # Break and do the final swap
         arr[pos] = cursor
-    
+
+    print(counter)
     return arr, counter
+
+def insertionSort(alist):
+	counter = 0
+	for i in range(1,len(alist)):
+
+		#element to be compared
+		current = alist[i]
+
+		#comparing the current element with the sorted portion and swapping
+		while i>0 and alist[i-1]>current:
+			counter += 1
+			alist[i] = alist[i-1]
+			i = i-1
+			alist[i] = current
+
+	return alist, counter
 
 #python implemenation for bubble_sort
 def bubble_sort(arr):
@@ -155,16 +173,17 @@ def heap_sort(arr):
     # Build a maxheap. 
     for i in range(n, -1, -1): 
         heapify(arr, n, i) 
-  
+
     # One by one extract elements 
     for i in range(n-1, 0, -1): 
         arr[i], arr[0] = arr[0], arr[i]   # swap 
         heapify(arr, i, 0)
 
+
 #Function for testing all the sorts and outputing data to file
 def test_suite(arr):
     size_of_array = len(arr)
-    
+    arr2 = arr
     #reseting comparision counter for merge and heap sort.
     global c12
     global c14
@@ -180,7 +199,7 @@ def test_suite(arr):
 
     #testing insertion sort
     start = timer()
-    sorted, counter = insertion_sort(arr)
+    sorted, counter = insertionSort(arr2)
     end = timer()
     time = end - start
     write2file(INSE, "Timing for array size {}: {} seconds.".format(size_of_array, time))
@@ -191,17 +210,16 @@ def test_suite(arr):
     merge_sort(arr)
     end = timer()
     time = end - start
-    write2file(MERG, "MERG")
     write2file(MERG, "Timing for array size {}: {} seconds.".format(size_of_array, time))
     write2file(MERG, "Number of comparisions for array size {} is: {}".format(size_of_array, c12))
 
     #testing bubble sort
     start = timer()
-    heap_sort(arr)
+    heap_sort(arr2)
     end = timer()
     time = end - start
     write2file(HEAP, "Timing for array size {}: {} seconds.".format(size_of_array, time))
-    write2file(HEAP, "Number of comparisions for array size {} is: {}".format(size_of_array, c14))
+    write2file(HEAP, "Number of comparisions for array size {} is: {}".format(size_of_array, time))
 
 if __name__ == '__main__':
 
