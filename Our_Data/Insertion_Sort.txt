@@ -1,0 +1,4 @@
+Timing for array size 1000: 0.00010745399958977941 seconds.
+Number of comparisions for array size 1000 is: 0
+Timing for array size 1000: 0.00010898800064751413 seconds.
+Number of comparisions for array size 1000 is: 0

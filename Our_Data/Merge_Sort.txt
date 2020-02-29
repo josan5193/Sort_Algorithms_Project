@@ -1,0 +1,6 @@
+MERG
+Timing for array size 1000: 0.002582185999926878 seconds.
+Number of comparisions for array size 1000 is: 6931
+MERG
+Timing for array size 1000: 0.0028974619999644347 seconds.
+Number of comparisions for array size 1000 is: 6931
