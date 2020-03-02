@@ -1,0 +1,13 @@
+-------------AVERAGE CASE------------
+Timing for array size 1000: 0.27761920000000007 seconds.
+Number of comparisions for array size 1000 is: 498759
+Timing for array size 10000: 28.445517100000004 seconds.
+Number of comparisions for array size 10000 is: 49994334
+Timing for array size 100000: 3423.2972137 seconds.
+Number of comparisions for array size 100000 is: 4999829705
+-------------BEST CASE------------
+Timing for array size 10000: 0.0033663999993223115 seconds.
+Number of comparisions for array size 10000 is: 9999
+-------------WORST CASE------------
+Timing for array size 10000: 48.21718510000028 seconds.
+Number of comparisions for array size 10000 is: 49995000
